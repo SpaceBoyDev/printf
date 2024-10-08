@@ -10,21 +10,26 @@ CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
-SRCS =
+SRCS = \
+	main.c \
+	ft_printf.c
 
-BONUS =
+#BONUS =
 
 OBJS = $(SRCS:.c=.o)
 
-BNS = $(BONUS:.c=.o)
+#BNS = $(BONUS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	$(AR) $(ARFLAGS) -o $(NAME) $(OBJS)
 
-bonus: $(BNS)
-	$(AR) $(ARFLAGS) $(NAME) $(BNS)
+#bonus: $(BNS)
+#	$(AR) $(ARFLAGS) $(NAME) $(BNS)
+
+cc: $(OBJS)
+	$(CC) $(CFLAGS) $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS) $(BNS)
