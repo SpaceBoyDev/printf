@@ -15,22 +15,15 @@ SRCS = \
 	ft_printnumbers.c \
 	ft_printcharacters.c
 
-#BONUS =
-
 OBJS = $(SRCS:.c=.o)
-
-#BNS = $(BONUS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(ARFLAGS) -o $(NAME) $(OBJS)
 
-#bonus: $(BNS)
-#	$(AR) $(ARFLAGS) $(NAME) $(BNS)
-
 cc: $(OBJS)
-	$(CC) $(CFLAGS) $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	$(RM) $(OBJS) $(BNS)
