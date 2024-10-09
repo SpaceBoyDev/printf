@@ -6,64 +6,48 @@
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 18:41:20 by dario             #+#    #+#             */
-/*   Updated: 2024/10/08 20:07:30 by dario            ###   ########.fr       */
+/*   Updated: 2024/10/09 19:35:53 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-static void	ft_putstr_fd(char *s, int fd)
-{
-	while (*s)
-	{
-		write(fd, s, 1);
-		++s;
-	}
-}
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-static size_t	ft_countvariables(char const *format)
-{
-	size_t	var_count;
-
-	var_count = 0;
-	while(*format)
-	{
-		if (*format == '%')
-			++var_count;
-		++format;
-	}
-	return (var_count);
-}
-
-static void	ft_selectcase(char format, va_list arg)
+static void	ft_selectcase(char format, va_list arg, int *len)
 {
 	if (format == 'c')
-	{
-		ft_putchar_fd(va_arg(arg, int), 1);
-		printf("Caso char");
-	}
+		ft_putchar_fd(va_arg(arg, int), len);
 	else if (format == 's')
-		ft_putstr_fd(va_arg(arg, char *), 1);
+		ft_putstr_fd(va_arg(arg, char *), len);
+	else if (format == 'p')
+	{
+		write(1, "0x", 2);
+		ft_printhexa(va_arg(arg, size_t), "0123456789abcdef", len);
+	}
+	else if (format == 'd' || format == 'i')
+		ft_putnbr_fd(va_arg(arg, int), len);
+	else if (format == 'u')
+		ft_putunsigned_fd(va_arg(arg, unsigned int), len);
+	else if (format == 'x')
+		ft_printhexa(va_arg(arg, size_t), "0123456789abcdef", len);
+	else if (format == 'X')
+		ft_printhexa(va_arg(arg, size_t), "0123456789ABCDEF", len);
+	else if (format == '%')
+		ft_putchar_fd('%', len);
 }
 
 int	ft_printf(char const *format, ...)
 {
+	int	len;
 	va_list	arg_list;
-	size_t	var_count;
 
+	len = 0;
 	va_start(arg_list, format);
-
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			++format;
-			ft_selectcase(*format, arg_list);
+			ft_selectcase(*format, arg_list, &len);
 			++format;
 		}
 		else
@@ -72,14 +56,23 @@ int	ft_printf(char const *format, ...)
 			++format;
 		}
 	}
-	return (0);
+	va_end(arg_list);
+	return (len);
 }
 
 int	main(void)
 {
-	size_t		n = 5;
-	char		c = '(';
-	char		s[] = "CARAMBOLOIcadas 87093";
-	ft_printf("\nEl char es %c y el string es %s\n", c, s);
+	int				printf_size;
+	int				ft_printf_size;
+	int				n = -2345;
+	unsigned int	un = 345789;
+	char			c = 'c';
+	char			s[] = "string";
+
+
+	printf("\nChecking printf...\n");
+	printf_size = printf("\nChar -> %c\nString -> %s\nPointer -> %p\nDecimal -> %d\nInt -> %i\nUnsigned -> %u\nhexa -> %x\nHEXA -> %X", c, s, &n, n, n , n, un, un);
+	ft_printf_size = ft_printf("\nChar -> %c\nString -> %s\nPointer -> %p\nDecimal -> %d\nInt -> %i\nUnsigned -> %u\nhexa -> %x\nHEXA -> %X", c, s, &n, n, n , n, un, un);
+	printf("printf_size -> %d\nft_printf_size -> %d", printf_size, ft_printf_size);
 	return (0);
 }

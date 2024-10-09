@@ -11,8 +11,9 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 SRCS = \
-	main.c \
-	ft_printf.c
+	ft_printf.c \
+	ft_printnumbers.c \
+	ft_printcharacters.c
 
 #BONUS =
 

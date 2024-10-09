@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printcharacters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 19:06:17 by dario             #+#    #+#             */
-/*   Updated: 2024/10/08 19:15:27 by dario            ###   ########.fr       */
+/*   Created: 2024/10/09 19:18:22 by dario             #+#    #+#             */
+/*   Updated: 2024/10/09 19:36:39 by dario            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	main(void)
+void	ft_putstr_fd(char *s, int *len)
 {
-	size_t		n = 5;
-	char	s[] = "string";
-	printf("Hay %d numeros en %d de esta %s\n", n, n, s);
-	return (0);
+	if (!s)
+		ft_putstr_fd("(null)", len);
+	while (*s)
+	{
+		ft_putchar_fd(*s, len);
+		++s;
+	}
+}
+
+void	ft_putchar_fd(char c, int *len)
+{
+	write(1, &c, 1);
+	++(*len);
 }
