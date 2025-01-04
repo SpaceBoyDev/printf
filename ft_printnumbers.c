@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printnumbers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:07:35 by dario             #+#    #+#             */
-/*   Updated: 2024/10/09 20:43:01 by dario            ###   ########.fr       */
+/*   Updated: 2024/12/03 18:05:09 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ void	ft_printhexa(size_t num, char *hex_digits, int *len)
 	if (num >= 16)
 		ft_printhexa((num / 16), hex_digits, len);
 	ft_putchar(hex_digits[num % 16], len);
+}
+
+void	ft_printpointer(size_t num, char *hex_digits, int *len)
+{
+	if (num == 0)
+		return (ft_putstr("(nil)", len));
+	ft_putstr("0x", len);
+	ft_printhexa(num, hex_digits, len);
 }
 
 void	ft_putnbr(int n, int *len)

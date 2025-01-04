@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printcharacters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dario <dario@student.42.fr>                +#+  +:+       +#+        */
+/*   By: darmarti <darmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 19:18:22 by dario             #+#    #+#             */
-/*   Updated: 2024/10/09 20:43:10 by dario            ###   ########.fr       */
+/*   Updated: 2024/12/03 17:36:24 by darmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putstr(char *s, int *len)
 {
 	if (!s)
-		ft_putstr("(null)", len);
+		return (ft_putstr("(null)", len));
 	while (*s)
 	{
 		ft_putchar(*s, len);

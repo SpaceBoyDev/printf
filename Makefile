@@ -11,7 +11,6 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 SRCS = \
-	main_printf.c \
 	ft_printf.c \
 	ft_printnumbers.c \
 	ft_printcharacters.c
@@ -21,13 +20,13 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) -o $(NAME) $(OBJS)
+	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
 
-cc: $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+%.o: %.c
+	$(CC) $(CFLAGS) $< -o $@ -c
 
 clean:
-	$(RM) $(OBJS) $(BNS)
+	$(RM) $(OBJS)
 
 fclean: clean
 	$(RM) $(NAME)
