@@ -95,5 +95,4 @@ cc -Wall -Wextra -Werror main_printf.c -L. -lftprintf -I. -o main_printf
 - `stdarg.h` — variadic argument handling with `va_list`.
 - `write(2)` — writing output to the standard output.
 - `ar(1)` — creating the static library.
-- 42 project subject: **ft_printf**.
 
